@@ -17,8 +17,9 @@ if(isset($_POST['update_product'])){
    $price = mysqli_real_escape_string($conn, $_POST['price']);
    $details = mysqli_real_escape_string($conn, $_POST['details']);
 
-   mysqli_query($conn, "UPDATE `products` SET name = '$name', details = '$details', price = '$price' WHERE id = '$update_p_id'") or die('query failed');
+   $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
 
+   mysqli_query($conn, "UPDATE products SET name = '$name', details = '$details', price = '$price', quantity = '$quantity' WHERE id = '$update_p_id'") or die('query failed');
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
@@ -77,6 +78,7 @@ if(isset($_POST['update_product'])){
    <input type="hidden" value="<?php echo $fetch_products['image']; ?>" name="update_p_image">
    <input type="text" class="box" value="<?php echo $fetch_products['name']; ?>" required placeholder="update product name" name="name">
    <input type="number" min="0" class="box" value="<?php echo $fetch_products['price']; ?>" required placeholder="update product price" name="price">
+   <input type="number" min="0" class="box" value="<?php echo $fetch_products['quantity']; ?>" required placeholder="update available quantity" name="quantity">
    <textarea name="details" class="box" required placeholder="update product details" cols="30" rows="10"><?php echo $fetch_products['details']; ?></textarea>
    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="image">
    <input type="submit" value="update product" name="update_product" class="btn">

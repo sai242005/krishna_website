@@ -37,10 +37,26 @@ if(isset($_POST['order'])){
 
     if($cart_total == 0){
         $message[] = 'your cart is empty!';
+    }elseif(!empty($out_of_stock_items)){
+        $message[] = 'insufficient stock for: ' . implode(', ', $out_of_stock_items) . '. Please update your cart.';
     }elseif(mysqli_num_rows($order_query) > 0){
         $message[] = 'order placed already!';
     }else{
         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
+        //deduct ordered quantity from product tables
+        $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+
+    while($cart_item = mysqli_fetch_assoc($cart_query)){
+    $pid = $cart_item['pid'];  // make sure column name is correct
+    $ordered_qty = $cart_item['quantity'];
+
+    mysqli_query($conn, 
+    "UPDATE products 
+     SET quantity = quantity - $ordered_qty 
+     WHERE id = $pid 
+     AND quantity >= $ordered_qty") 
+     or die('query failed');
+}
         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
         $message[] = 'order placed successfully!';
     }

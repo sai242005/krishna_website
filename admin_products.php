@@ -25,7 +25,8 @@ if(isset($_POST['add_product'])){
    if(mysqli_num_rows($select_product_name) > 0){
       $message[] = 'product name already exist!';
    }else{
-      $insert_product = mysqli_query($conn, "INSERT INTO `products`(name, details, price, image) VALUES('$name', '$details', '$price', '$image')") or die('query failed');
+      $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+      $insert_product = mysqli_query($conn, "INSERT INTO products(name, details, price, image, quantity) VALUES('$name', '$details', '$price', '$image', '$quantity')") or die('query failed');
 
       if($insert_product){
          if($image_size > 2000000){
@@ -79,6 +80,7 @@ if(isset($_GET['delete'])){
       <h3>add new product</h3>
       <input type="text" class="box" required placeholder="enter product name" name="name">
       <input type="number" min="0" class="box" required placeholder="enter product price" name="price">
+      <input type="number" min="0" class="box" required placeholder="enter available quantity" name="quantity">
       <textarea name="details" class="box" required placeholder="enter product details" cols="30" rows="10"></textarea>
       <input type="file" accept="image/jpg, image/jpeg, image/png" required class="box" name="image">
       <input type="submit" value="add product" name="add_product" class="btn">
@@ -100,6 +102,9 @@ if(isset($_GET['delete'])){
          <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
          <div class="name"><?php echo $fetch_products['name']; ?></div>
          <div class="details"><?php echo $fetch_products['details']; ?></div>
+         <div class="quantity <?php echo ($fetch_products['quantity'] <= 10) ? 'low-stock' : ''; ?>">
+            Available Qty : <span><?php echo $fetch_products['quantity']; ?> <?php echo ($fetch_products['quantity'] <= 10) ? '(Low Stock!)' : 'in stock'; ?></span>
+         </div>
          <a href="admin_update_product.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">update</a>
          <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
       </div>

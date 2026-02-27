@@ -352,6 +352,14 @@ section{
    padding:.5rem 0;
 }
 
+.show-products .box-container .box .details.quantity-details{
+   border: .2rem solid var(--orange);
+   border-radius: .5rem;
+   padding: .8rem 1.2rem;
+   margin-top: .8rem;
+   background-color: var(--light-bg);
+}
+
 .update-product form{
    max-width: 50rem;
    border-radius: .5rem;
@@ -570,4 +578,33 @@ section{
    width: 100% !important;
    height: 250px !important;
    object-fit: contain !important;
+}
+
+.show-products .box-container .box .quantity{
+   margin-top: 1rem;
+   font-size: 1.6rem;
+   padding: .8rem 1rem;
+   border-radius: .5rem;
+   background-color: #eafaf1;
+   color: #27ae60;
+   font-weight: 500;
+   border: 1px solid #27ae60;
+}
+
+.show-products .box-container .box .quantity span{
+   font-weight: bold;
+}
+
+/* Low stock style */
+.show-products .box-container .box .quantity.low-stock{
+   background-color: #fdecea;
+   color: #e74c3c;
+   border: 1px solid #e74c3c;
+   animation: blink 1s infinite alternate;
+}
+
+/* blinking effect for low stock */
+@keyframes blink{
+   from { opacity: 1; }
+   to { opacity: 0.6; }
 }

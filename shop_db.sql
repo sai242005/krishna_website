@@ -110,22 +110,22 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `details` varchar(500) NOT NULL,
   `price` int(100) NOT NULL,
-  `image` varchar(100) NOT NULL
+  `image` varchar(100) NOT NULL,
+  `quantity` int(100) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `details`, `price`, `image`) VALUES
-(13, 'pink rose', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque error earum quasi facere optio tenetur.', 12, 'pink roses.jpg'),
-(15, 'cottage rose', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque error earum quasi facere optio tenetur.', 15, 'cottage rose.jpg'),
-(16, 'lavendor rose', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, nobis tenetur voluptatibus officiis odit minus fugit dolore accusantium fuga ipsa!', 13, 'lavendor rose.jpg'),
-(17, 'yellow tulipa', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque error earum quasi facere optio tenetur.', 14, 'yellow tulipa.jpg'),
-(18, 'red tulipa', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, nobis tenetur voluptatibus officiis odit minus fugit dolore accusantium fuga ipsa!', 11, 'red tulipa.jpg'),
-(19, 'pink bouquet', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque error earum quasi facere optio tenetur.', 15, 'pink bouquet.jpg'),
-(20, 'pink queen rose', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque error earum quasi facere optio tenetur.', 24, 'pink queen rose.jpg');
-
+INSERT INTO `products` (`id`, `name`, `details`, `price`, `image`, `quantity`) VALUES
+(13, 'Sugarcane', 'A naturally grown, healthy sugarcane plant known for its strong growth and economic value.', 33, 'pink roses.jpg', 50),
+(15, 'Dracaena Plant', 'A stylish, low-maintenance indoor plant that improves air quality and enhances modern interiors.', 210, 'cottage rose.jpg', 40),
+(16, 'Marigold', 'Marigold is a flowering plant known for its bright flowers and ornamental importance.', 250, 'lavendor rose.jpg', 30),
+(17, 'Money Plant', 'Money plant known for its attractive leaves and easy maintenance.Believed to bring freshness and positive energy into your space.', 159, 'yellow tulipa.jpg', 20),
+(18, 'Aglaonema Stripes Plant', 'A beautiful ornamental plant with striking striped leaves.Low-maintenance and perfect for enhancing indoor aesthetics.', 299, 'red tulipa.jpg', 60),
+(21,'Areca Palm','The Areca Palm is popular indoor plant known for its graceful appearance and air-purifying qualities.',120,'bloomnation.jpg',50);
 -- --------------------------------------------------------
 
 --
@@ -196,8 +196,8 @@ ALTER TABLE `orders`
 --
 -- Indexes for table `products`
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `products`
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
